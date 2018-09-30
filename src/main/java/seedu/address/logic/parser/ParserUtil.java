@@ -13,7 +13,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.syllabusbook.Syllabus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -122,20 +121,4 @@ public class ParserUtil {
         }
         return tagSet;
     }
-
-    /**
-     * Parses a {@code String syllabus} into a {@code Syllabus}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code syllabus} input is invalid.
-     */
-    public static Syllabus parseSyllabus(String syllabus) throws ParseException {
-        requireNonNull(syllabus);
-        String trimmedSyllabus = syllabus.trim();
-        if (!Syllabus.isValidSyllabus(trimmedSyllabus)) {
-            throw new ParseException(Syllabus.MESSAGE_SYLLABUS_CONSTRAINTS);
-        }
-        return new Syllabus(trimmedSyllabus);
-    }
-
 }

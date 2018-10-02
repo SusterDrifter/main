@@ -1,12 +1,15 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the address-book level
@@ -93,6 +96,40 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+
+    /**
+     * Removes tags from all persons in addressbook
+     * Iterate through the list of Persons and performs removeTag for each one of them individually.
+     * @param tagName
+     */
+    public void removeTag(Tag tagName) {
+        persons.forEach(person -> removeTagFromThisPerson(tagName, person));
+    }
+
+    /**
+     * Checks if able to remove tag from this particular individual.
+     * If tag doesn't exist, do nothing and return.
+     * If tag exists, remove tag and update person
+     * @param tagName
+     * @param thisPerson
+     */
+    private void removeTagFromThisPerson (Tag tagName, Person thisPerson){
+        //Obtain the tags that this person currently has
+        Set<Tag> newTags = new HashSet<>(thisPerson.getTags());
+
+        //check if can remove the tag for this person
+        //return if tag does not exist
+        if (!newTags.remove(tagName)) {
+            return;
+        }
+
+        //create a new person with specified tag removed
+        Person newPerson = new Person(thisPerson.getName(), thisPerson.getPhone(),
+                thisPerson.getEmail(), thisPerson.getAddress(), newTags);
+
+        //call method to update this person
+        updatePerson(thisPerson, newPerson);
+    }
     //// util methods
 
     @Override

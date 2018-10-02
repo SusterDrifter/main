@@ -2,9 +2,9 @@ package seedu.address.storage;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
-
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
-
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.XmlUtil;
 
@@ -12,6 +12,10 @@ import seedu.address.commons.util.XmlUtil;
  * Stores addressbook data in an XML file
  */
 public class XmlFileStorage {
+
+
+    private static final Logger logger = LogsCenter.getLogger(XmlFileStorage.class);
+
     /**
      * Saves the given addressbook data to the specified file.
      */

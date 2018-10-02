@@ -2,11 +2,13 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -17,6 +19,8 @@ import seedu.address.model.person.Person;
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
+
+    private static final Logger logger = LogsCenter.getLogger(XmlSerializableAddressBook.class);
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 

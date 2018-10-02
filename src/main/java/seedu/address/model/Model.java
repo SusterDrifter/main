@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -42,6 +43,11 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+    /**
+     * Remove a particular tag from everyone in the addressbook.
+     */
+    void deleteTag(Tag tagName);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -75,4 +81,6 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+
 }

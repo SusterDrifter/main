@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
-
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -34,6 +31,8 @@ import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+
+import com.google.common.eventbus.Subscribe;
 
 /**
  * The main entry point to the application.
@@ -85,11 +84,15 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
+            logger.info(" Error below here +++++++");
             addressBookOptional = storage.readAddressBook();
+            logger.info("FIRST +++++++");
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
+            logger.info("SECOND +++++++");
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            logger.info(" THIRD +++++++");
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();

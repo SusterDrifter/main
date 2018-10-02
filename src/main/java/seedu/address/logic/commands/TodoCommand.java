@@ -51,7 +51,8 @@ public class TodoCommand extends Command {
 
         Person personToAddSyllabus = new Person(personTarget.getName(),
                 personTarget.getPhone(), personTarget.getEmail(), personTarget.getAddress(),
-                personTarget.getTags(), personTarget.getSyllabusBook().addToSyllabusBook(syllabus));
+                personTarget.getTags(), personTarget.getSyllabusBook().addToSyllabusBook(syllabus),
+                personTarget.getPayments());
 
         model.updatePerson(personTarget, personToAddSyllabus);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

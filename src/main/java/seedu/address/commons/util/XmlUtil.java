@@ -1,20 +1,23 @@
 package seedu.address.commons.util;
 
-import static java.util.Objects.requireNonNull;
-
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.util.logging.Logger;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import seedu.address.commons.core.LogsCenter;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Helps with reading from and writing to XML files.
  */
 public class XmlUtil {
+
+    private static final Logger logger = LogsCenter.getLogger(XmlUtil.class);
 
     /**
      * Returns the xml data in the file as an object of the specified type.
@@ -37,6 +40,7 @@ public class XmlUtil {
             throw new FileNotFoundException("File not found : " + file.toAbsolutePath());
         }
 
+        logger.info(" Error is below here at line 43 of XmlUtil.java");
         JAXBContext context = JAXBContext.newInstance(classToConvert);
         Unmarshaller um = context.createUnmarshaller();
 

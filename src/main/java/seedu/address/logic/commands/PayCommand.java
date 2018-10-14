@@ -49,7 +49,7 @@ public class PayCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-
+        boolean newEntry = true;
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -62,16 +62,21 @@ public class PayCommand extends Command {
         List<Payment> pay = personTarget.getPayments();
 
         for (int i = 0; i < pay.size(); i++) {
-            if (pay.get(i).toString().equals(newPayment.toString())) {
-                throw new CommandException(Messages.MESSAGE_DUPLICATE_ENTRY);
+            if (pay.get(i).getMonth() == newPayment.getMonth() && pay.get(i).getYear() == newPayment.getYear()) {
+                pay.set(i, new Payment(pay.get(i), newPayment.getAmount()));
+                newEntry = false;
+                break;
             }
         }
 
-        List<Payment> updatedPayments = updatePayment(personTarget.getPayments(), newPayment);
+        if (newEntry) {
+            if (pay.size() > 10) { pay.remove(0); }
+            pay = updatePayment(personTarget.getPayments(), newPayment);
+        }
 
         Person personToPay = new Person(personTarget.getName(), personTarget.getPhone(),
                 personTarget.getEmail(), personTarget.getAddress(), personTarget.getSubjects(),
-                personTarget.getTuitionTiming(), personTarget.getTags(), updatedPayments);
+                personTarget.getTuitionTiming(), personTarget.getTags(), pay);
 
         model.updatePerson(personTarget, personToPay);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

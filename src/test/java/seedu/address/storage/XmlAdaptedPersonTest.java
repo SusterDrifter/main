@@ -12,7 +12,10 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.subject.Subject;
 import seedu.address.testutil.Assert;
 
@@ -40,7 +43,7 @@ public class XmlAdaptedPersonTest {
     private static final List<XmlAdaptedPay> VALID_PAYMENT = BENSON.getPayments().stream()
             .map(XmlAdaptedPay::new)
             .collect(Collectors.toList());
-
+  
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         XmlAdaptedPerson person = new XmlAdaptedPerson(BENSON);
@@ -115,9 +118,40 @@ public class XmlAdaptedPersonTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
-        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_SUBJECTS, VALID_TUITION_TIMING, invalidTags, VALID_PAYMENT);
+        XmlAdaptedPerson person =
+                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SUBJECTS, VALID_TUITION_TIMING, invalidTags, VALID_PAYMENT);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
+
+    @Test
+    public void toModelType_invalidSubject_throwsIllegalValueException() {
+        List<XmlAdaptedSubject> invalidSubject = new ArrayList<>(VALID_SUBJECTS);
+        invalidSubject.add(new XmlAdaptedSubject(new Subject(INVALID_SUBJECT)));
+        XmlAdaptedPerson person =
+                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        invalidSubject, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
+        String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullSubject_throwsIllegalValueException() {
+        XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                null, VALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTuitionTiming_throwsIllegalValueException() {
+        XmlAdaptedPerson person =
+                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SUBJECTS, INVALID_TUITION_TIMING, VALID_TAGS, VALID_PAYMENT);
+        String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    //null
 
 }

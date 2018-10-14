@@ -23,17 +23,17 @@ public class Payment {
     public static final String TAG_VALIDATION_REGEX = "(.)*(\\d)(.)*";
 
     private final Index studentIndex;
-    private final int amount;
+    private int amount;
     private final int month;
     private final int year;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Payment}.
      *
      * @param index A valid index name.
      * @param amount A valid amount.
      * @param month A valid month subjectName.
-     * @param year A valid year subjectName
+     * @param year A valid year subjectName.
      */
     public Payment(Index index, int amount, int month, int year) {
         this.studentIndex = index;
@@ -41,6 +41,20 @@ public class Payment {
         this.month = month;
         this.year = year;
     }
+
+    /**
+     * Constructs a {@code Payment} with an incremented amount.
+     *
+     * @param payment A {@code Payment}.
+     * @param toAdd The amount to add.
+     */
+    public Payment(Payment payment, int toAdd) {
+        this.studentIndex = payment.getIndex();
+        this.month = payment.getMonth();
+        this.year = payment.getYear();
+        this.amount = payment.getAmount() + toAdd;
+    }
+
 
     /**
      * Returns true if a given int is a valid number.
@@ -68,6 +82,14 @@ public class Payment {
      */
     public static boolean isValidYear(int test) {
         return String.valueOf(test).matches(TAG_VALIDATION_REGEX);
+    }
+
+    /**
+     * Updates the current {@code Payment} amount to new payment amount
+     * @param toUpdate the {@code Payment}amount to add to current amount
+     */
+    public void update(Payment toUpdate) {
+        this.amount += toUpdate.getAmount();
     }
 
     /**
@@ -111,7 +133,6 @@ public class Payment {
 
         return other == this
                 || (other instanceof Payment
-                && this.studentIndex.equals(((Payment) other).studentIndex)
                 && this.amount == (((Payment) other).amount)
                 && this.month == (((Payment) other).month)
                 && this.year == (((Payment) other).year));

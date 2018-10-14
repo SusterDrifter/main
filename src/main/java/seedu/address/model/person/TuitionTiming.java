@@ -20,7 +20,7 @@ public class TuitionTiming {
     public static final String DAY_REGEX = "^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)";
     public static final String TIME_REGEX = "\\d{1,2}[:{1}]\\d{2}(am|pm|AM|PM)$";
 
-    /*
+    /**
      * The first character of the tuition time and day must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -54,7 +54,7 @@ public class TuitionTiming {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
+                || (other instanceof TuitionTiming // instanceof handles nulls
                 && value.equals(((TuitionTiming) other).value)); // state check
     }
 

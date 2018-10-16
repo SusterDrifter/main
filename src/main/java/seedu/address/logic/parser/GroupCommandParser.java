@@ -4,8 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TuitionTiming;
-import seedu.address.model.person.TuitionTimingContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new GroupCommand object
@@ -18,24 +16,18 @@ public class GroupCommandParser implements Parser<GroupCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GroupCommand parse(String args) throws ParseException {
+
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
-            //use date()
-        }
-
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-        String keyword = nameKeywords[0];
-
-        if (!(keyword.matches(TuitionTiming.DAY_REGEX) || keyword.matches(TuitionTiming.TIME_REGEX))
-                || nameKeywords.length > 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
 
-        return new GroupCommand(new TuitionTimingContainsKeywordsPredicate(keyword));
+        if (!(trimmedArgs.matches(TuitionTiming.DAY_REGEX) || trimmedArgs.matches(TuitionTiming.TIME_REGEX))) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
+        }
+
+        return new GroupCommand(new TuitionTimingContainsKeywordsPredicate(trimmedArgs));
     }
 }
-
-/*
-TODO: Also need to group by Date() if no input entered
- */

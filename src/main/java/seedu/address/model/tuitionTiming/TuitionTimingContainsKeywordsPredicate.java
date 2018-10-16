@@ -1,15 +1,17 @@
-package seedu.address.model.person;
+package seedu.address.model.tuitionTiming;
 
+import java.time.DayOfWeek;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person> {
 
-    private final String keyword;
+    private final String keyword; //note that keyword is capitalised for day.
 
     public TuitionTimingContainsKeywordsPredicate(String keyword) {
         this.keyword = keyword;
@@ -17,18 +19,12 @@ public class TuitionTimingContainsKeywordsPredicate implements Predicate<Person>
 
     @Override
     public boolean test(Person person) {
-        String trimmedArgs = person.getTuitionTiming().value.trim();
-        String[] trimmedArgsArr = trimmedArgs.split("\\s+");
-        String day = trimmedArgsArr[0];
-        String time = trimmedArgsArr[1];
+        DayOfWeek day = person.getTuitionTiming().day;
+        String time = person.getTuitionTiming().time;
 
-        if (day.endsWith(",")) {
-            day = day.substring(0, day.length() - 1);
-        }
-
-        if (keyword.matches(TuitionTiming.DAY_REGEX)) {
-            return StringUtil.containsWordIgnoreCase(day, keyword);
-        } else if (keyword.matches(TuitionTiming.TIME_REGEX)) {
+        if ((keyword.toLowerCase()).matches((TuitionTiming.DAY_REGEX).toLowerCase())) {
+            return day.equals(DayOfWeek.valueOf(keyword.toUpperCase()));
+        } else if ((keyword.toLowerCase()).matches((TuitionTiming.TIME_REGEX).toLowerCase())) {
             return StringUtil.containsWordIgnoreCase(time, keyword);
         }
         return false;

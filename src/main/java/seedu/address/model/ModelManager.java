@@ -101,6 +101,13 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    public void updateFilteredPersonList(Predicate<Person> predicate1, Predicate<Person> predicate2) {
+        requireNonNull(predicate1);
+        requireNonNull(predicate2);
+        filteredPersons.setPredicate(predicate1);
+        filteredPersons.setPredicate(predicate2);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override

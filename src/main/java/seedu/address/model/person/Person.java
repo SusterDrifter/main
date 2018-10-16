@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.model.subject.Subject;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuitionTiming.TuitionTiming;
 
 /**
  * Represents a Person in the address book.

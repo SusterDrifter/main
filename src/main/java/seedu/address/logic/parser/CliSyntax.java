@@ -18,5 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_PAYMENT_MONTH = new Prefix("m/");
     public static final Prefix PREFIX_PAYMENT_YEAR = new Prefix("y/");
     public static final Prefix PREFIX_SYLLABUS = new Prefix("sy/");
+    public static final Prefix PREFIX_DATE = new Prefix("day/");
+    public static final Prefix PREFIX_TIME = new Prefix("time/");
 
 }

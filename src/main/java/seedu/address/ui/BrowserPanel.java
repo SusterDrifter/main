@@ -24,9 +24,7 @@ import seedu.address.model.subject.Subject;
  */
 public class BrowserPanel extends UiPart<Region> {
 
-    public static final String DEFAULT_PAGE = "default.html";
-
-    private static final String FXML = "BrowserPanel.fxml";
+    public static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

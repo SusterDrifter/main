@@ -4,10 +4,8 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.nio.file.Path;
@@ -190,7 +188,7 @@ public abstract class TutorHelperSystemTest {
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
-        getBrowserPanel().rememberUrl();
+        getBrowserPanel().rememberStudent();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getStudentListPanel().rememberSelectedStudentCard();
@@ -199,10 +197,10 @@ public abstract class TutorHelperSystemTest {
     /**
      * Asserts that the previously selected card is now deselected and the browser's url remains displaying the details
      * of the previously selected student.
-     * @see BrowserPanelHandle#isUrlChanged()
+     * @see BrowserPanelHandle#isStudentChanged()
      */
     protected void assertSelectedCardDeselected() {
-        assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getBrowserPanel().isStudentChanged());
         assertFalse(getStudentListPanel().isAnyCardSelected());
     }
 
@@ -231,11 +229,11 @@ public abstract class TutorHelperSystemTest {
 
     /**
      * Asserts that the browser's url and the selected card in the student list panel remain unchanged.
-     * @see BrowserPanelHandle#isUrlChanged()
+     * @see BrowserPanelHandle#isStudentChanged()
      * @see StudentListPanelHandle#isSelectedStudentCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
-        assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getBrowserPanel().isStudentChanged());
         assertFalse(getStudentListPanel().isSelectedStudentCardChanged());
     }
 
@@ -281,7 +279,7 @@ public abstract class TutorHelperSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getStudentListPanel(), getModel().getFilteredStudentList());
-        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
+        assertEquals(getBrowserPanel().DEFAULT_STUDENT, getBrowserPanel().getLoadedStudent());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
@@ -292,17 +290,5 @@ public abstract class TutorHelperSystemTest {
      */
     protected Model getModel() {
         return testApp.getModel();
-    }
-
-    /**
-     * Returns a truncated url with only details on card, the {@code Student}'s {@code Name}, {@code Phone},
-     * {@code Email}, {@code Address} and {@code Tag} if any.
-     */
-    protected String cardUrl(String queryUrl) {
-        StringBuilder truncated = new StringBuilder(queryUrl);
-        int tuitionTimingDayOccurencePos = truncated.indexOf("&tuitionTimingDay");
-        int tagsOccurencePos = truncated.indexOf("&tags");
-        truncated.delete(tuitionTimingDayOccurencePos, tagsOccurencePos - 1);
-        return truncated.toString();
     }
 }

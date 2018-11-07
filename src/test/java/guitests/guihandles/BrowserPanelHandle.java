@@ -1,12 +1,16 @@
 package guitests.guihandles;
 
-import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import guitests.GuiRobot;
-import javafx.concurrent.Worker;
 import javafx.scene.Node;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -16,84 +20,68 @@ import seedu.address.testutil.StudentBuilder;
 public class BrowserPanelHandle extends NodeHandle<Node> {
 
     public static final String BROWSER_ID = "#browser";
-
-    private boolean isWebViewLoaded = true;
-
-    private URL lastRememberedUrl;
+    public static final Student DEFAULT_STUDENT = new StudentBuilder().build();
+    private Student lastStudent = null;
+    private boolean isLoaded = true;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     public BrowserPanelHandle(Node browserPanelNode) {
         super(browserPanelNode);
-
-        WebView webView = getChildNode(BROWSER_ID);
-        WebEngine engine = webView.getEngine();
-        new GuiRobot().interact(() -> engine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
-            if (newState == Worker.State.RUNNING) {
-                isWebViewLoaded = false;
-            } else if (newState == Worker.State.SUCCEEDED) {
-                isWebViewLoaded = true;
+        StackPane stackPaneParent = getChildNode(BROWSER_ID);
+        new GuiRobot().interact(() -> {
+            if (stackPaneParent.isNeedsLayout()) {
+                isLoaded = false;
+            } else {
+                stackPaneParent.requestLayout();
+                isLoaded = true;
             }
-        }));
+        });
     }
 
-    /**
-     * Returns the {@code URL} of the currently loaded page.
-     */
-    public URL getLoadedUrl() {
-        return WebViewUtil.getLoadedUrl(getChildNode(BROWSER_ID));
+    public Scene getLoadedScene() {
+        return getChildNode(BROWSER_ID).getScene();
+    }
+
+    public void rememberStudent() {
+        lastStudent = getLoadedStudent();
+    }
+
+    public boolean isStudentChanged() {
+        return !lastStudent.equals(getLoadedScene());
     }
 
     /**
      * Translates the given URL into the equivalent {@code Student}
      */
     public Student getLoadedStudent() {
-        String query = getLoadedUrl().getQuery()
-                .replaceAll("\\[", "")
-                .replaceAll("\\]", "")
-                .replaceAll("%20", " ");
-        String[] studentDataDecoded = query.split("&");
+
+        Scene scene = getLoadedScene();
         StudentBuilder createdStudent = new StudentBuilder();
 
-        for (String encodedData: studentDataDecoded) {
-            String[] idAndValue = encodedData.split("=");
-            switch(idAndValue[0]) {
-            case "name":
-                createdStudent.withName(idAndValue[1]);
-                break;
-            case "phone":
-                createdStudent.withPhone(idAndValue[1]);
-                break;
-            case "email":
-                createdStudent.withEmail(idAndValue[1]);
-                break;
-            case "address":
-                createdStudent.withAddress(idAndValue[1]);
-                break;
-            default:
-                break;
-            }
+        String name = ((Label)scene.lookup("#nameLabel")).getText();
+        String address = ((Label)scene.lookup("#addressLabel")).getText();
+        String phone = ((Label)scene.lookup("#phoneLabel")).getText();
+        String email = ((Label)scene.lookup("#emailLabel")).getText();
+
+        if (name.isEmpty() || address.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+            logger.log(Level.WARNING,  "No student has been loaded. " +
+                    "Using default student information instead.");
+            lastStudent = DEFAULT_STUDENT;
+            return DEFAULT_STUDENT;
         }
+
+        createdStudent.withName(name);
+        createdStudent.withAddress(address);
+        createdStudent.withPhone(phone);
+        createdStudent.withEmail(email);
+
         return createdStudent.build();
-    }
-
-    /**
-     * Remembers the {@code URL} of the currently loaded page.
-     */
-    public void rememberUrl() {
-        lastRememberedUrl = getLoadedUrl();
-    }
-
-    /**
-     * Returns true if the current {@code URL} is different from the subjectName remembered by the most recent
-     * {@code rememberUrl()} call.
-     */
-    public boolean isUrlChanged() {
-        return !lastRememberedUrl.equals(getLoadedUrl());
     }
 
     /**
      * Returns true if the browser is done loading a page, or if this browser has yet to load any page.
      */
     public boolean isLoaded() {
-        return isWebViewLoaded;
+        return isLoaded;
     }
 }

@@ -27,6 +27,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String FXML = "BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private Student lastStudent;
 
     @FXML
     private Label nameLabel;
@@ -154,6 +155,8 @@ public class BrowserPanel extends UiPart<Region> {
             subjectList.getChildren().clear();
             setBackgroundState(false);
         }
+
+        lastStudent = student;
     }
 
     /**

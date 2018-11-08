@@ -40,6 +40,5 @@
     -fx-background-radius: 10;
     -fx-min-width: 250;
     -fx-max-width: 250;
-    -fx-text-overrun: hidden;
     -fx-font-family: 'Abel';
 }

@@ -45,6 +45,7 @@ public class StudentListPanel extends UiPart<Region> {
                         raise(new StudentPanelSelectionChangedEvent(newValue));
                     }
                 });
+
     }
 
     /**

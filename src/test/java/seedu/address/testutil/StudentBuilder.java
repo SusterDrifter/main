@@ -173,7 +173,7 @@ public class StudentBuilder {
         return this;
     }
 
-    public Student build() throws IllegalArgumentException {
+    public Student build() {
         return new Student(name, phone, email, address, subjects, tuitionTiming, tags, payments);
     }
 

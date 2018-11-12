@@ -36,7 +36,7 @@ allow users to easily manage the subjects.
 
 ** Add syllabus into TutorHelper (link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/7[Pull request #7])
 ** Allow students to have multiple subjects  (link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/35[Pull request #35])
-** Converts subjects to enumeration for easier management of code (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/65[#65])
+** Converts subjects to enumeration for easier management of code (link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/65[Pull request #65])
 ** Data writing into storage of subject and its syllabus (link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/46[Pull request #46])
 ** Re-implementation of BrowserPanel into its current fxml implementation (link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/226[Pull request #226])
 

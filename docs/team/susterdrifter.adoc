@@ -34,11 +34,11 @@ allow users to easily manage the subjects.
 
 * *Minor enhancement*:
 
-** Add syllabus into TutorHelper (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/7[#7])
-** Allow students to have multiple subjects  (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/35[#35])
-** Converts subjects to enumeration for easier management of code (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/65[#65])
-** Data writing into storage of subject and its syllabus (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/46[#46])
-** Re-implementation of BrowserPanel into its current fxml implementation (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/226[#226])
+** Add syllabus into TutorHelper (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/7[#7])
+** Allow students to have multiple subjects  (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/35[#35])
+** Converts subjects to enumeration for easier management of code (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/65[#65])
+** Data writing into storage of subject and its syllabus (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/46[#46])
+** Re-implementation of BrowserPanel into its current fxml implementation (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/226[#226])
 
 * *Code contributed*: +
 +
@@ -52,13 +52,13 @@ link:https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=s
 ** Project management:
 *** Assign issues to group members and labels on Github
 ** Enhancements to existing features:
-*** Allow students to have multiple subjects (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/35[#35])
-*** Updated the GUI formatting as well as its styling (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/192[#192])
-*** Wrote additional tests for features added: addsyll, deletesyll, copysub, mark, subjects and syllabus (Pull requests https://github.com/CS2103-AY1819S1-W13-4/main/pull/151[#151], https://github.com/CS2103-AY1819S1-W13-4/main/pull/142[#142], https://github.com/CS2103-AY1819S1-W13-4/main/pull/128[#128], https://github.com/CS2103-AY1819S1-W13-4/main/pull/120[#120])
+*** Allow students to have multiple subjects (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/35[#35])
+*** Updated the GUI formatting as well as its styling (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/192[#192])
+*** Wrote additional tests for features added: addsyll, deletesyll, copysub, mark, subjects and syllabus (Pull requests link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/151[#151], link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/142[#142], link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/128[#128], link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/120[#120])
 ** Documentation:
-*** Added section about valid inputs for name, email, and subjects in the User Guide (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/197[#197])
+*** Added section about valid inputs for name, email, and subjects in the User Guide (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/197[#197])
 *** Added sections for addsyll, deletesyll, copysub, mark in the User Guide
-*** Added section for copysub in the Developer Guide (Pull request https://github.com/CS2103-AY1819S1-W13-4/main/pull/91[#91])
+*** Added section for copysub in the Developer Guide (Pull request link:https://github.com/CS2103-AY1819S1-W13-4/main/pull/91[#91])
 ** Community:
 *** Review other PRs
 *** Reported bugs and suggestions for other teams in the class

@@ -7,7 +7,16 @@
 
 == Overview
 
-TutorHelper is a Java application intended for tutors who would like to organise their students' information. The tutor interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 25 kLoC.
+TutorHelper is a desktop administration application intended for Tutors who would like to organise their students' information. TutorHelper uses a CLI (command-line interface) as its main form of input: tutors issue commands in the form of successive lines of text. Having multiple students at once can be a hassle to deal with, especially with each student having his / her own curriculum to learn, tuition timing, and payments to make. Our team of five decided to create TutorHelper by building upon the existing AddressBook Level 4 application. TutorHelper offers an easy way to keep track of your schedule and keep tabs on the students, allowing you to efficiently plan ahead. TutorHelper has a GUI created with JavaFX. It is written in Java, and has about 25 kLoC.
+
+Some of the new main features include: +
+Grouping +
+Payment +
+Earnings +
+Add/Edit/Delete/Mark Syllabus +
+Add/Delete/Copy Subject
+
+This project portfolio consists of the contributions I have made to TutorHelper.
 
 == Summary of Contributions
 
